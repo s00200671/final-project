@@ -1,0 +1,34 @@
+﻿<Window x:Class="DietProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DietProject"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="Meals_lbx" Grid.Column="1" HorizontalAlignment="Left" Height="214" Margin="10.2,196,0,0" VerticalAlignment="Top" Width="245" SelectionChanged="Meals_lbx_SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="100,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.468,0.652" Text="Meal" FontSize="22"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="16,116,0,0" TextWrapping="Wrap" Text="Carbohydrates" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="51,292,0,0" TextWrapping="Wrap" Text="Calories" VerticalAlignment="Top" RenderTransformOrigin="2.552,-0.288"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="61,253,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="51,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.167,0.327" Height="16" Width="42"><Run Text="Protein"/><LineBreak/><Run/></TextBlock>
+        <Button x:Name="AddMeal_btn" Grid.Column="0" Content="Add Meal" HorizontalAlignment="Left" Margin="163,337,0,0" VerticalAlignment="Top" Width="75" Click="AddMeal_btn_Click"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="77,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.167,0.327" Text="Fat"/>
+        <TextBox x:Name="MealName_tbx" Grid.Column="0" HorizontalAlignment="Left" Height="23" Margin="118,245,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="MealCalories_tbx" Grid.Column="0" HorizontalAlignment="Left" Height="23" Margin="118,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="MealCarb_tbx" Grid.Column="0" HorizontalAlignment="Left" Height="23" Margin="118,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="MealProtein_tbx" Grid.Column="0" HorizontalAlignment="Left" Height="23" Margin="118,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="MealFat_tbx" Grid.Column="0"  HorizontalAlignment="Left" Height="23" Margin="118,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ListBox x:Name="Days_lbx" Grid.Column="1" HorizontalAlignment="Left" Height="144" Margin="10.2,10,0,0" VerticalAlignment="Top" Width="245" SelectionChanged="Meals_lbx_SelectionChanged"/>
+
+    </Grid>
+</Window>
