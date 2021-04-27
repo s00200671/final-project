@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DietProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <ListBox x:Name="Meals_lbx" Grid.Column="1" HorizontalAlignment="Left" Height="214" Margin="10.2,196,0,0" VerticalAlignment="Top" Width="245" SelectionChanged="Meals_lbx_SelectionChanged"/>
-        <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="100,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.468,0.652" Text="Meal" FontSize="22"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="102,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.468,0.652" Text="Meal" FontSize="22"/>
         <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="16,116,0,0" TextWrapping="Wrap" Text="Carbohydrates" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="51,292,0,0" TextWrapping="Wrap" Text="Calories" VerticalAlignment="Top" RenderTransformOrigin="2.552,-0.288"/>
         <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="61,253,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
@@ -28,7 +28,9 @@
         <TextBox x:Name="MealCarb_tbx" Grid.Column="0" HorizontalAlignment="Left" Height="23" Margin="118,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="MealProtein_tbx" Grid.Column="0" HorizontalAlignment="Left" Height="23" Margin="118,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="MealFat_tbx" Grid.Column="0"  HorizontalAlignment="Left" Height="23" Margin="118,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ListBox x:Name="Days_lbx" Grid.Column="1" HorizontalAlignment="Left" Height="144" Margin="10.2,10,0,0" VerticalAlignment="Top" Width="245" SelectionChanged="Meals_lbx_SelectionChanged"/>
+        <ListBox x:Name="Days_lbx" Grid.Column="1" HorizontalAlignment="Left" Height="144" Margin="10.2,10,0,0" VerticalAlignment="Top" Width="245" SelectionChanged="Calender_lbx_SelectionChanged"/>
+        <DatePicker x:Name="Date_dp" HorizontalAlignment="Left" Margin="118,71,0,0" VerticalAlignment="Top" Height="21" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="68,76,0,0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
