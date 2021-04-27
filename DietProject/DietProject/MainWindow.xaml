@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
 
-        <ListBox x:Name="Meals_lbx" Grid.Column="1" HorizontalAlignment="Left" Height="214" Margin="10.2,196,0,0" VerticalAlignment="Top" Width="245" SelectionChanged="Meals_lbx_SelectionChanged"/>
+        <ListBox x:Name="Meals_lbx" Grid.Column="1" HorizontalAlignment="Left" Height="139" Margin="10.2,271,0,0" VerticalAlignment="Top" Width="245" SelectionChanged="Meals_lbx_SelectionChanged"/>
         <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="102,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.468,0.652" Text="Meal" FontSize="22"/>
         <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="16,116,0,0" TextWrapping="Wrap" Text="Carbohydrates" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="51,292,0,0" TextWrapping="Wrap" Text="Calories" VerticalAlignment="Top" RenderTransformOrigin="2.552,-0.288"/>
@@ -28,9 +28,25 @@
         <TextBox x:Name="MealCarb_tbx" Grid.Column="0" HorizontalAlignment="Left" Height="23" Margin="118,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="MealProtein_tbx" Grid.Column="0" HorizontalAlignment="Left" Height="23" Margin="118,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="MealFat_tbx" Grid.Column="0"  HorizontalAlignment="Left" Height="23" Margin="118,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ListBox x:Name="Days_lbx" Grid.Column="1" HorizontalAlignment="Left" Height="144" Margin="10.2,10,0,0" VerticalAlignment="Top" Width="245" SelectionChanged="Calender_lbx_SelectionChanged"/>
-        <DatePicker x:Name="Date_dp" HorizontalAlignment="Left" Margin="118,71,0,0" VerticalAlignment="Top" Height="21" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="68,76,0,0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top"/>
+        <ListBox x:Name="Days_lbx" Grid.Column="1" HorizontalAlignment="Left" Height="144" Margin="10.2,90,0,0" VerticalAlignment="Top" Width="245" SelectionChanged="Calender_lbx_SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="68,78,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Height="16"/>
+        <Grid HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="120" Margin="118,78,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="3" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="hour_tbx" Grid.Column="0" />
+            <TextBlock Grid.Column="1" Text=":"/>
+            <TextBox x:Name="minute_tbx" Grid.Column="2" />
+            <ComboBox x:Name="time_cbx" Grid.Column="3">
+                <ComboBoxItem IsSelected="True">AM</ComboBoxItem>
+                <ComboBoxItem>PM</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+        <Button x:Name="Day_btn" Content="Add day" Grid.Column="1" HorizontalAlignment="Left" Margin="180.2,57,0,0" VerticalAlignment="Top" Width="75" Click="Day_btn_Click"/>
+        <DatePicker x:Name="day_dp" Grid.Column="1" HorizontalAlignment="Left" Margin="10.2,55,0,0" VerticalAlignment="Top" Height="30" Width="165"/>
 
     </Grid>
 </Window>

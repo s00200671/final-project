@@ -39,24 +39,32 @@ namespace DietProject
 
         private void AddMeal_btn_Click(object sender, RoutedEventArgs e)
         {
-            //if()
-            //try
-            //{
-            //    dbDays.Insert[Days_cbx.SelectedIndex].Meals.Add(new Meal(
-            //        { MealName_tbx.Text,      // Name
-            //                       Int32.Parse(MealCalories_tbx.Text),                       // Calories
-            //                       Int32.Parse(MealCarb_tbx.Text),                           // Carbs
-            //                       Int32.Parse(MealProtein_tbx.Text),                        // Protein
-            //                       Int32.Parse(MealFat_tbx.Text)));                          // Fat
+            try
+            {
+                Day selectedDay = Days_lbx.SelectedItem as Day;
 
-            //    Meals_lbx.ItemsSource = null;
-            //    Meals_lbx.ItemsSource = Days.Days[Days_cbx.SelectedIndex].Meals;
-            //}
-            //catch (Exception)
-            //{
-        //    messagebox.show("error");
-        //}
-    }
+                if (selectedDay != null)
+                {
+                    string newTime = generateDBTime(time_cbx.SelectedItem.ToString(), hour_tbx.Text, minute_tbx.Text);
+
+                    MessageBox.Show(newTime);
+
+                    Meal newMeal = new Meal(
+                                       MealName_tbx.Text,                            // Name
+                                       newTime,                                      // time
+                                       Int32.Parse(MealCalories_tbx.Text),           // Calories
+                                       Int32.Parse(MealCarb_tbx.Text),               // Carbs
+                                       Int32.Parse(MealProtein_tbx.Text),            // Protein
+                                       Int32.Parse(MealFat_tbx.Text));               // Fat
+
+                    AddMealDB(selectedDay, newMeal);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("error");
+            }
+        }
 
         private void Meals_lbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -65,20 +73,57 @@ namespace DietProject
 
         private void Calender_lbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Days_lbx.SelectedItem != null)
-            {
-                Day day = Days_lbx.SelectedItem as Day;
-                Meals_lbx.ItemsSource = day.Meals; 
-            }
+            RefreshMeals();
         }
 
         private void RefreshDays()
         {
             var getDays = dbDays.Query()
-                        .Select(x => x.date)
+                        .Select(x => x)
                         .ToList();
 
             Days_lbx.ItemsSource = getDays;
+        }
+
+        private void RefreshMeals()
+        {
+            if (Days_lbx.SelectedItem != null)
+            {
+                Day day = Days_lbx.SelectedItem as Day;
+                if (day.Meals == null)
+                {
+                    day.Meals = new List<Meal>();
+                }
+                Meals_lbx.ItemsSource = day.Meals;
+            }
+        }
+
+        public string generateDBTime(string DayNight, string hour, string minute)
+        {
+            return DayNight + hour + ":" + minute;
+        }
+
+        public void AddMealDB(Day day, Meal meal)
+        {
+            day.Meals.Add(meal);
+            dbDays.Update(day);
+        }
+
+        private void Day_btn_Click(object sender, RoutedEventArgs e)
+        {
+            string selectedDate = day_dp.SelectedDate.ToString();
+            MessageBox.Show(selectedDate);
+            AddDayDB(selectedDate);
+            RefreshDays();
+        }
+
+        public void AddDayDB(string iDate)
+        {
+            dbDays.Insert(new Day
+            {
+                date = iDate,
+                Meals = new List<Meal>()
+            });
         }
     }
 }
