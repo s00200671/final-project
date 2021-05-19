@@ -10,7 +10,16 @@ namespace DietProject
     {
         public int Id { get; set; }
         public string date { get; set; }
+        public int TotalCalories { get; set; }
+        public int TotalProtein { get; set; }
+        public int TotalCarbs { get; set; }
+        public int TotalFat { get; set; }
         public List<Meal> Meals { get; set; }
+
+        public override string ToString()
+        {
+            return date;
+        }
     }
 
     public class Meal
@@ -30,6 +39,11 @@ namespace DietProject
             Protein = protein;
             Carbs = carbs;
             Fat = fat;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

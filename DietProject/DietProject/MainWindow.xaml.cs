@@ -58,6 +58,8 @@ namespace DietProject
                                        Int32.Parse(MealFat_tbx.Text));               // Fat
 
                     AddMealDB(selectedDay, newMeal);
+
+                    RefreshMeals();
                 }
             }
             catch (Exception)
@@ -68,12 +70,31 @@ namespace DietProject
 
         private void Meals_lbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Meal selectedMeal = Meals_lbx.SelectedItem as Meal;
 
+            if (selectedMeal != null)
+            {
+                Cal_tblk.Text = selectedMeal.Calories.ToString();
+                Carbs_tblk.Text = selectedMeal.Carbs.ToString();
+                Protein_tblk.Text = selectedMeal.Protein.ToString();
+                Fat_tblk.Text = selectedMeal.Fat.ToString();
+            }
         }
 
         private void Calender_lbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RefreshMeals();
+            Day selectedDay = Days_lbx.SelectedItem as Day;
+         
+            if(selectedDay != null)
+            {
+                ClearTblk();
+
+                totalCal_tblk.Text = selectedDay.TotalCalories.ToString();
+                totalCarbs_tblk.Text = selectedDay.TotalCarbs.ToString();
+                totalProtein_tblk.Text = selectedDay.TotalProtein.ToString();
+                totalFat_tblk.Text = selectedDay.TotalFat.ToString();
+            }
+            RefreshMeals();            
         }
 
         private void RefreshDays()
@@ -105,6 +126,10 @@ namespace DietProject
 
         public void AddMealDB(Day day, Meal meal)
         {
+            day.TotalCalories += meal.Calories;
+            day.TotalCarbs += meal.Carbs;
+            day.TotalProtein += meal.Protein;
+            day.TotalFat += meal.Fat;
             day.Meals.Add(meal);
             dbDays.Update(day);
         }
@@ -124,6 +149,19 @@ namespace DietProject
                 date = iDate,
                 Meals = new List<Meal>()
             });
+        }
+
+        public void ClearTblk()
+        {
+            totalCal_tblk.Text = "";
+            totalCarbs_tblk.Text = "";
+            totalProtein_tblk.Text = "";
+            totalFat_tblk.Text = "";
+
+            Cal_tblk.Text = "";
+            Carbs_tblk.Text = "";
+            Protein_tblk.Text = "";
+            Fat_tblk.Text = "";
         }
     }
 }
