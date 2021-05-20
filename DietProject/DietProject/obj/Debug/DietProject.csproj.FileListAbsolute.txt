@@ -22,3 +22,9 @@ C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bi
 C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\MaterialDesignThemes.Wpf.pdb
 C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\MaterialDesignThemes.Wpf.xml
 C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\obj\Debug\App.baml
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\LiveCharts.dll
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\LiveCharts.pdb
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\LiveCharts.xml
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\LiveCharts.Wpf.xml

@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LiteDB;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace DietProject
 {
@@ -162,6 +164,12 @@ namespace DietProject
             Carbs_tblk.Text = "";
             Protein_tblk.Text = "";
             Fat_tblk.Text = "";
+        }
+
+        private void TabItem_GotFocus(object sender, RoutedEventArgs e)
+        {
+            StatGraph graph = new StatGraph();
+            DataContext = graph;
         }
     }
 }
