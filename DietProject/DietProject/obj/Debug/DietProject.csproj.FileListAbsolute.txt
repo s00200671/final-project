@@ -16,3 +16,9 @@ C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\ob
 C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\obj\Debug\DietProject.csproj.CopyComplete
 C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\obj\Debug\DietProject.exe
 C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\obj\Debug\DietProject.pdb
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\MaterialDesignColors.dll
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\MaterialDesignColors.pdb
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\vkqwn\Documents\college\y2\ood\final-project\DietProject\DietProject\obj\Debug\App.baml

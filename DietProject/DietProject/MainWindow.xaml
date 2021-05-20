@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DietProject"
         mc:Ignorable="d"
+        
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Title="MainWindow" Height="526" Width="882.4" Loaded="Window_Loaded">
     <Grid>
         <TabControl>
@@ -33,7 +36,7 @@
                     <TextBox x:Name="MealFat_tbx" Grid.Column="0"  HorizontalAlignment="Left" Height="23" Margin="125,284,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134"/>
                     <ListBox x:Name="Days_lbx" Grid.Column="1" HorizontalAlignment="Left" Height="144" Margin="10.2,90,0,0" VerticalAlignment="Top" Width="245" SelectionChanged="Calender_lbx_SelectionChanged"/>
                     <TextBlock HorizontalAlignment="Left" Grid.Column="0" Margin="74,119,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Height="16" RenderTransformOrigin="-0.116,0.55"/>
-                    
+
                     <Grid HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="118" Margin="125,118,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
@@ -44,13 +47,13 @@
                         <TextBox x:Name="hour_tbx" Grid.Column="0" />
                         <TextBlock Grid.Column="1" Text=":"/>
                         <TextBox x:Name="minute_tbx" Grid.Column="2" />
-                        <ComboBox x:Name="time_cbx" Grid.Column="3" Margin="5.4,0,-14,0">
+                        <ComboBox x:Name="time_cbx" Grid.Column="3" Margin="5,-5,-13.6,0" VerticalAlignment="Bottom" Height="25">
                             <ComboBoxItem IsSelected="True">AM</ComboBoxItem>
                             <ComboBoxItem>PM</ComboBoxItem>
                         </ComboBox>
                     </Grid>
-                    
-                    <Button x:Name="Day_btn" Content="Add day" Grid.Column="1" HorizontalAlignment="Left" Margin="180,55,0,0" VerticalAlignment="Top" Width="75" Click="Day_btn_Click" Height="30"/>
+
+                    <Button x:Name="Day_btn" Content="Add" Grid.Column="1" HorizontalAlignment="Left" Margin="180,55,0,0" VerticalAlignment="Top" Width="75" Click="Day_btn_Click" Height="30"/>
                     <DatePicker x:Name="day_dp" Grid.Column="1" HorizontalAlignment="Left" Margin="10.2,55,0,0" VerticalAlignment="Top" Height="30" Width="165"/>
                     <Label Content="Day info:" Grid.Column="2" HorizontalAlignment="Left" Margin="25.4,39,0,0" VerticalAlignment="Top" FontSize="16"/>
                     <Label Content="Calories:" Grid.Column="2" HorizontalAlignment="Left" Margin="25.4,78,0,0" VerticalAlignment="Top"/>
@@ -85,6 +88,8 @@
                         <RowDefinition Height="8*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
+
+
                 </Grid>
             </TabItem>
         </TabControl>
