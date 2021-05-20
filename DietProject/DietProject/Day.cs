@@ -14,6 +14,7 @@ namespace DietProject
         public int TotalProtein { get; set; }
         public int TotalCarbs { get; set; }
         public int TotalFat { get; set; }
+
         public List<Meal> Meals { get; set; }
 
         public override string ToString()
