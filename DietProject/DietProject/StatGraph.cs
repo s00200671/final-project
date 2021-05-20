@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using LiveCharts;
 using LiveCharts.Wpf;
+using LiteDB;
 
 namespace DietProject
 {
@@ -18,11 +19,13 @@ namespace DietProject
             {
                 new ColumnSeries
                 {
-                    Values = new ChartValues<int> { 1000, 2500, 3000, 1500, 1200, 1700, 2000 }
+                    Values = new ChartValues<int>()
                 }
             };
 
             Labels = GenerateLabels();
+            SeriesCollection[0].Values = GenerateValues();
+
             Formatter = value => value.ToString("N");
 
             DataContext = this;
@@ -42,6 +45,29 @@ namespace DietProject
             }
 
             return dates.ToArray();
+        }
+        
+        public ChartValues<int> GenerateValues()
+        {
+            LiteDatabase db = new LiteDatabase(@"C:\db\userData.db");
+
+            using (db)
+            {
+                ILiteCollection<Day> dbDays = db.GetCollection<Day>("days");
+                var query = dbDays.Query().
+                            Where(day => Convert.ToDateTime(day.date) >= DateTime.Now.Date.AddDays(-7) && Convert.ToDateTime(day.date) <= DateTime.Now.Date)
+                            .Select(x => x)
+                            .ToList();
+
+                ChartValues<int> Values = new ChartValues<int>();
+
+                foreach(Day day in query)
+                {
+                    Values.Add(day.TotalCalories);
+                }
+
+                return Values;
+            }
         }
     }
 }
