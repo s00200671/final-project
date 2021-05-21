@@ -21,10 +21,13 @@ namespace DietProject
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    
+    public static class DB
+    {
+        public static LiteDatabase data = new LiteDatabase(@"C:\db\userData.db");
+    }
     public partial class MainWindow : Window
     {
-
-        LiteDatabase db = new LiteDatabase(@"C:\db\userData.db");
         ILiteCollection<Day> dbDays;
 
         public MainWindow()
@@ -34,11 +37,12 @@ namespace DietProject
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dbDays = db.GetCollection<Day>("days");
+            dbDays = DB.data.GetCollection<Day>("days");
 
             RefreshDays();
         }
 
+        // ADDING MEAL SECTION
         private void AddMeal_btn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -68,6 +72,13 @@ namespace DietProject
             {
                 MessageBox.Show("error");
             }
+        }
+
+        private void Day_btn_Click(object sender, RoutedEventArgs e)
+        {
+            string selectedDate = day_dp.SelectedDate.ToString();
+            DBDays.AddDayDB(dbDays, selectedDate);
+            RefreshDays();
         }
 
         private void Meals_lbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -101,9 +112,11 @@ namespace DietProject
 
         private void RefreshDays()
         {
+            // Get the days of data, and order it by descending (most recent) by using the date
             var getDays = dbDays.Query()
                         .Select(x => x)
-                        .ToList();
+                        .ToList()
+                        .OrderByDescending(x => x.Id);
 
             Days_lbx.ItemsSource = getDays;
         }
@@ -148,13 +161,6 @@ namespace DietProject
             }
         }
 
-        private void Day_btn_Click(object sender, RoutedEventArgs e)
-        {
-            string selectedDate = day_dp.SelectedDate.ToString();
-            DBDays.AddDayDB(dbDays, selectedDate);
-            RefreshDays();
-        }
-
         public void ClearTblk()
         {
             totalCal_tblk.Text = "";
@@ -168,10 +174,41 @@ namespace DietProject
             Fat_tblk.Text = "";
         }
 
+        // GRAPH SECTION
         private void TabItem_GotFocus(object sender, RoutedEventArgs e)
         {
-            StatGraph graph = new StatGraph();
+            StatGraph graph = new StatGraph(7);
             DataContext = graph;
+        }
+
+        private void PastDays_cbx_DropDownClosed(object sender, EventArgs e)
+        {
+            string selectedOption = PastDays_cbx.Text.ToLower();
+
+            MessageBox.Show(selectedOption);
+
+            if (selectedOption != null)
+            {
+                if (selectedOption == "week")
+                {
+                    StatGraph graph = new StatGraph(7);
+                    DataContext = graph;
+                }
+                else if (selectedOption == "month")
+                {
+                    StatGraph graph = new StatGraph(30);
+                    DataContext = graph;
+                }
+                else
+                {
+                    throw new Exception("Not a valid drop down selection");
+                }
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DB.data.Dispose();
         }
     }
 }

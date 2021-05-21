@@ -13,7 +13,7 @@ namespace DietProject
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
 
-        public StatGraph()
+        public StatGraph(int range)
         {
             SeriesCollection = new SeriesCollection
             {
@@ -23,51 +23,52 @@ namespace DietProject
                 }
             };
 
-            Labels = GenerateLabels();
-            SeriesCollection[0].Values = GenerateValues();
+            Labels = GenerateLabels(range);
+            SeriesCollection[0].Values = GenerateValues(range);
 
             Formatter = value => value.ToString("N");
 
             DataContext = this;
         }
 
-        public string[] GenerateLabels()
+        public string[] GenerateLabels(int range)
         {
             var dates = new List<string>();
             DateTime currentDay = DateTime.Now;
 
-            Console.WriteLine(currentDay.ToString());
-
-            for (DateTime dt = currentDay.AddDays(-7); dt <= currentDay; dt = dt.AddDays(1))
+            for (DateTime dt = currentDay.AddDays(-range); dt <= currentDay; dt = dt.AddDays(1))
             {
-                Console.WriteLine(dt.ToString());
-                dates.Add(dt.Date.ToString("dd-MM-yy"));
+                dates.Add(dt.Date.ToString("ddd MMM"));
             }
 
+            Console.WriteLine("hi");
+            Console.WriteLine(range);
+            foreach (string s in dates)
+            {
+                Console.WriteLine(s);
+            }
             return dates.ToArray();
         }
-        
-        public ChartValues<int> GenerateValues()
+
+        public ChartValues<int> GenerateValues(int range)
         {
-            LiteDatabase db = new LiteDatabase(@"C:\db\userData.db");
+            ILiteCollection<Day> dbDays = DB.data.GetCollection<Day>("days");
 
-            using (db)
+            int selectedRange = range;
+            var query = dbDays.Query()
+                        .Where(day => Convert.ToDateTime(day.date) >= DateTime.Now.Date.AddDays(-selectedRange) && Convert.ToDateTime(day.date) <= DateTime.Now.Date)
+                        .Select(x => x)
+                        .ToList();
+
+            ChartValues<int> Values = new ChartValues<int>();
+
+            foreach (Day day in query)
             {
-                ILiteCollection<Day> dbDays = db.GetCollection<Day>("days");
-                var query = dbDays.Query().
-                            Where(day => Convert.ToDateTime(day.date) >= DateTime.Now.Date.AddDays(-7) && Convert.ToDateTime(day.date) <= DateTime.Now.Date)
-                            .Select(x => x)
-                            .ToList();
-
-                ChartValues<int> Values = new ChartValues<int>();
-
-                foreach(Day day in query)
-                {
-                    Values.Add(day.TotalCalories);
-                }
-
-                return Values;
+                Values.Add(day.TotalCalories);
+                Console.Write(day.TotalCalories + " , ");
             }
+
+            return Values;
         }
     }
 }
