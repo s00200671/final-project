@@ -47,7 +47,7 @@ namespace DietProject
 
                 if (selectedDay != null)
                 {
-                    string newTime = generateDBTime(time_cbx.SelectedItem.ToString(), hour_tbx.Text, minute_tbx.Text);
+                    string newTime = generateDBTime(time_cbx.SelectedItem.ToString(), Int16.Parse(hour_tbx.Text), Int16.Parse(minute_tbx.Text));
 
                     MessageBox.Show(newTime);
 
@@ -59,7 +59,7 @@ namespace DietProject
                                        Int32.Parse(MealProtein_tbx.Text),            // Protein
                                        Int32.Parse(MealFat_tbx.Text));               // Fat
 
-                    AddMealDB(selectedDay, newMeal);
+                    DBDays.AddMealDB(dbDays, selectedDay, newMeal);
 
                     RefreshMeals();
                 }
@@ -121,36 +121,38 @@ namespace DietProject
             }
         }
 
-        public string generateDBTime(string DayNight, string hour, string minute)
+        public string generateDBTime(string DayNight, int hour, int minute)
         {
-            return DayNight + hour + ":" + minute;
-        }
-
-        public void AddMealDB(Day day, Meal meal)
-        {
-            day.TotalCalories += meal.Calories;
-            day.TotalCarbs += meal.Carbs;
-            day.TotalProtein += meal.Protein;
-            day.TotalFat += meal.Fat;
-            day.Meals.Add(meal);
-            dbDays.Update(day);
+            if (hour > 12 || hour < 0 || minute > 59 || minute < 0)
+            {
+                throw new Exception("Hour must be between 1 and 12, minute must be between 0 and 60");
+            }
+            if (DayNight.ToLower() == "am")
+            {
+                return hour.ToString("00") + minute.ToString("00");
+            }
+            else if (DayNight.ToLower() == "pm")
+            {
+                if (hour < 12)
+                {
+                    return (hour + 12).ToString("00") + minute.ToString("00");
+                }
+                else
+                {
+                    return "00" + minute.ToString("00");
+                }
+            }
+            else
+            {
+                throw new Exception("Error in choosing Day or night");
+            }
         }
 
         private void Day_btn_Click(object sender, RoutedEventArgs e)
         {
             string selectedDate = day_dp.SelectedDate.ToString();
-            MessageBox.Show(selectedDate);
-            AddDayDB(selectedDate);
+            DBDays.AddDayDB(dbDays, selectedDate);
             RefreshDays();
-        }
-
-        public void AddDayDB(string iDate)
-        {
-            dbDays.Insert(new Day
-            {
-                date = iDate,
-                Meals = new List<Meal>()
-            });
         }
 
         public void ClearTblk()

@@ -19,7 +19,7 @@ namespace DietProject
 
         public override string ToString()
         {
-            return date;
+            return Convert.ToDateTime(date).ToString("ddd, dd-MM-yy");
         }
     }
 

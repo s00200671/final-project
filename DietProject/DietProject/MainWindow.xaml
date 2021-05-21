@@ -98,14 +98,6 @@
                             <lvc:Axis Title="Sold Apps" LabelFormatter="{Binding Formatter}"></lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                     </lvc:CartesianChart>
-                    <!--<lvc:CartesianChart Series="{Binding graph}" Grid.Column="1" Grid.Row="1" LegendLocation="Left">
-                        <lvc:CartesianChart.AxisX>
-                            <lvc:Axis Title="Calories" Labels="{Binding Cal_labels}"></lvc:Axis>
-                        </lvc:CartesianChart.AxisX>
-                        <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Title="Date" Labels="{Binding Date_Labels}"></lvc:Axis>
-                        </lvc:CartesianChart.AxisY>
-                    </lvc:CartesianChart>-->
                 </Grid>
             </TabItem>
         </TabControl>
