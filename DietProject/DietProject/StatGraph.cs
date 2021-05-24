@@ -38,7 +38,7 @@ namespace DietProject
 
             for (DateTime dt = currentDay.AddDays(-range); dt <= currentDay; dt = dt.AddDays(1))
             {
-                dates.Add(dt.Date.ToString("ddd MMM"));
+                dates.Add(dt.Date.ToString("ddd, dd MMM"));
             }
 
             Console.WriteLine("hi");
@@ -53,19 +53,36 @@ namespace DietProject
         public ChartValues<int> GenerateValues(int range)
         {
             ILiteCollection<Day> dbDays = DB.data.GetCollection<Day>("days");
+            ChartValues<int> Values = new ChartValues<int>();
 
-            int selectedRange = range;
+            var days = new List<string>();
+            DateTime currentDay = DateTime.Now.Date;
+            DateTime startDay = currentDay.AddDays(-range);
+
+            for (DateTime dt = startDay; dt <= currentDay; dt = dt.AddDays(1))
+            {
+                days.Add(dt.Date.ToString());
+            }
+
             var query = dbDays.Query()
-                        .Where(day => Convert.ToDateTime(day.date) >= DateTime.Now.Date.AddDays(-selectedRange) && Convert.ToDateTime(day.date) <= DateTime.Now.Date)
+                        .Where(day => Convert.ToDateTime(day.date) >= startDay && Convert.ToDateTime(day.date) <= currentDay.Date)
                         .Select(x => x)
                         .ToList();
 
-            ChartValues<int> Values = new ChartValues<int>();
 
-            foreach (Day day in query)
+            for (int i = 0; i < days.Count; i++)
             {
-                Values.Add(day.TotalCalories);
-                Console.Write(day.TotalCalories + " , ");
+                var res = query.Find(day => day.date == days[i]);
+
+                if (res != null)
+                {
+                    Values.Add(res.TotalCalories);
+                    query.Remove(res);
+                }
+                else
+                {
+                    Values.Add(0);
+                }
             }
 
             return Values;
