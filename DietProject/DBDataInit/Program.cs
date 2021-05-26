@@ -92,7 +92,14 @@ namespace DBDataInit
                     dbDays.Insert(day);
                 }
 
-                Console.WriteLine("Data has been added!\nPress any key to close...");
+                Console.WriteLine("Data has been added!");
+
+                Console.WriteLine("Creating index on dates");
+
+                dbDays.EnsureIndex("date");
+
+                Console.WriteLine("Index created\nData initialization complete! Enter any key to close...");
+
 
                 Console.ReadLine();
             }

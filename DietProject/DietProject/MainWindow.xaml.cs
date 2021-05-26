@@ -38,6 +38,7 @@ namespace DietProject
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             dbDays = DB.data.GetCollection<Day>("days");
+            dbDays.EnsureIndex("date");
 
             RefreshDays();
         }
