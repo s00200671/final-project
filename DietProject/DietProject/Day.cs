@@ -8,8 +8,9 @@ namespace DietProject
 {
     public class Day
     {
+        // Day class, used for DB
         public int Id { get; set; }
-        public string date { get; set; }
+        public DateTime date { get; set; }
         public int TotalCalories { get; set; }
         public int TotalProtein { get; set; }
         public int TotalCarbs { get; set; }
@@ -25,6 +26,7 @@ namespace DietProject
 
     public class Meal
     {
+        // Meal class, used in day class
         public string Name { get; set; }
         public string Time { get; set; }
         public int Calories { get; set; }

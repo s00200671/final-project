@@ -22,9 +22,23 @@ namespace DietProject
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     
+
     public static class DB
     {
-        public static LiteDatabase data = new LiteDatabase(@"C:\db\userData.db");
+        public static LiteDatabase data;
+
+        static DB()
+        {
+            // Strings for db location
+            const string directory = @"C:\DietProjectDB";
+            const string db_path = @"C:\DietProjectDB\userData.db";
+
+            // If the folder does not exist, create it
+            System.IO.Directory.CreateDirectory(directory);
+
+            // Use the path for the new db in the newly created folder
+            data = new LiteDatabase(db_path);
+        }
     }
     public partial class MainWindow : Window
     {
@@ -37,22 +51,31 @@ namespace DietProject
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // Get the collection of days, and then ensure that an index exists on the date property
+            // If the index already exists, then it won't recreate it
             dbDays = DB.data.GetCollection<Day>("days");
             dbDays.EnsureIndex("date");
 
+            // Initalize the graph class and set the data context of the stat graph element to it
+            StatGraph graph = new StatGraph(7);
+            Stat_Graph.DataContext = graph;
+
+            // Refresh the days listbox
             RefreshDays();
         }
 
         // ADDING MEAL SECTION
         private void AddMeal_btn_Click(object sender, RoutedEventArgs e)
         {
+            // Attempt to add the day, and throw an error otherwise
             try
             {
                 Day selectedDay = Days_lbx.SelectedItem as Day;
 
                 if (selectedDay != null)
                 {
-                    string newTime = generateDBTime(time_cbx.Text, Int16.Parse(hour_tbx.Text), Int16.Parse(minute_tbx.Text));
+                    // Use the DBDays static class method to generate a time for the db when we add it 
+                    string newTime = DBDays.generateDBTime(time_cbx.Text, Int16.Parse(hour_tbx.Text), Int16.Parse(minute_tbx.Text));
 
                     MessageBox.Show(newTime);
 
@@ -64,12 +87,16 @@ namespace DietProject
                                        Int32.Parse(MealProtein_tbx.Text),            // Protein
                                        Int32.Parse(MealFat_tbx.Text));               // Fat
 
+                    // Add the newly created meal obj to the db
                     DBDays.AddMealDB(dbDays, selectedDay, newMeal);
 
+                    // Refresh the list of meals
                     RefreshMeals();
 
+                    // Clear the textboxes
                     ClearTblk();
 
+                    // Refresh the day info, since a new object is added, the calories will increase
                     totalCal_tblk.Text = selectedDay.TotalCalories.ToString();
                     totalCarbs_tblk.Text = selectedDay.TotalCarbs.ToString();
                     totalProtein_tblk.Text = selectedDay.TotalProtein.ToString();
@@ -84,9 +111,12 @@ namespace DietProject
 
         private void Day_btn_Click(object sender, RoutedEventArgs e)
         {
-            string selectedDate = day_dp.SelectedDate.ToString();
-            DBDays.AddDayDB(dbDays, selectedDate);
-            RefreshDays();
+            DateTime selectedDate = (DateTime)day_dp.SelectedDate;
+            if (selectedDate != null)
+            {
+                DBDays.AddDayDB(dbDays, selectedDate);
+                RefreshDays();
+            }
         }
 
         private void Meals_lbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -124,13 +154,14 @@ namespace DietProject
             var getDays = dbDays.Query()
                         .Select(x => x)
                         .ToList()
-                        .OrderByDescending(x => Convert.ToDateTime(x.date));
+                        .OrderByDescending(x => x.date);
 
             Days_lbx.ItemsSource = getDays;
         }
 
         private void RefreshMeals()
         {
+            // Refresh the meals list box
             if (Days_lbx.SelectedItem != null)
             {
                 Day day = Days_lbx.SelectedItem as Day;
@@ -143,35 +174,9 @@ namespace DietProject
             }
         }
 
-        public string generateDBTime(string DayNight, int hour, int minute)
-        {
-            if (hour > 12 || hour < 0 || minute > 59 || minute < 0)
-            {
-                throw new Exception("Hour must be between 1 and 12, minute must be between 0 and 60");
-            }
-            if (DayNight.ToLower() == "am")
-            {
-                return hour.ToString("00") + minute.ToString("00");
-            }
-            else if (DayNight.ToLower() == "pm")
-            {
-                if (hour < 12)
-                {
-                    return (hour + 12).ToString("00") + minute.ToString("00");
-                }
-                else
-                {
-                    return "00" + minute.ToString("00");
-                }
-            }
-            else
-            {
-                throw new Exception("Error in choosing Day or night");
-            }
-        }
-
         public void ClearTblk()
         {
+            // Clear all info text boxes
             totalCal_tblk.Text = "";
             totalCarbs_tblk.Text = "";
             totalProtein_tblk.Text = "";
@@ -184,12 +189,6 @@ namespace DietProject
         }
 
         // GRAPH SECTION
-        private void TabItem_GotFocus(object sender, RoutedEventArgs e)
-        {
-            StatGraph graph = new StatGraph(7);
-            DataContext = graph;
-        }
-
         private void PastDays_cbx_DropDownClosed(object sender, EventArgs e)
         {
             string selectedOption = PastDays_cbx.Text.ToLower();
@@ -199,12 +198,12 @@ namespace DietProject
                 if (selectedOption == "week")
                 {
                     StatGraph graph = new StatGraph(7);
-                    DataContext = graph;
+                    Stat_Graph.DataContext = graph;
                 }
                 else if (selectedOption == "month")
                 {
                     StatGraph graph = new StatGraph(30);
-                    DataContext = graph;
+                    Stat_Graph.DataContext = graph;
                 }
                 else
                 {
@@ -213,6 +212,7 @@ namespace DietProject
             }
         }
 
+        // ON EXIT
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DB.data.Dispose();

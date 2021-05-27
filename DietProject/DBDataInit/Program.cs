@@ -19,9 +19,14 @@ namespace DBDataInit
         static void Main(string[] args)
         {
 
-            const string db_path = @"C:\db\userData.db";
+            const string directory = @"C:\DietProjectDB";
+            const string db_path = @"C:\DietProjectDB\userData.db";
             // Construst DB if it doesn't exist.
-            Console.WriteLine("Constructing DB");
+            Console.WriteLine($"Creating directory in location {directory}");
+
+            System.IO.Directory.CreateDirectory(@"C:\DietProjectDB");
+
+            Console.WriteLine($"Constructing DB {db_path}");
 
             LiteDatabase db = new LiteDatabase(db_path);
 
@@ -40,7 +45,7 @@ namespace DBDataInit
                 {
                     days.Add(new Day()
                     {
-                        date = dt.ToString(),
+                        date = dt,
                         Meals = new List<Meal>()
                     });
                 }
@@ -52,38 +57,37 @@ namespace DBDataInit
 
                 // Day 2
                 AddMeal(days[1], new Meal("Avocado toast", "0900", 650, 34, 33, 22));
-                AddMeal(days[1], new Meal("Tuna Sandwhich", "1200", 800, 50, 30, 10));
+                AddMeal(days[1], new Meal("Chicken Salad", "1200", 800, 50, 30, 10));
                 AddMeal(days[1], new Meal("Chicken Pasta", "1900", 800, 40, 60, 20));
 
                 // Day 3
-                AddMeal(days[2], new Meal("Eggs and toast", "0700", 600, 30, 30, 20));
-                AddMeal(days[2], new Meal("Tuna Sandwhich", "1300", 800, 50, 30, 10));
-                AddMeal(days[2], new Meal("Roast Dinner", "1800", 800, 40, 60, 20));
+                AddMeal(days[2], new Meal("Cereal", "1000", 400, 20, 30, 20));
+                AddMeal(days[2], new Meal("Vegetable soup", "1400", 800, 50, 30, 10));
+                AddMeal(days[2], new Meal("Spaghetti and meatballs", "1700", 800, 40, 60, 20));
 
                 // Day 4
                 AddMeal(days[3], new Meal("Eggs and toast", "0700", 600, 30, 30, 20));
-                AddMeal(days[3], new Meal("Tuna Sandwhich", "1300", 800, 50, 30, 10));
-                AddMeal(days[3], new Meal("Roast Dinner", "1800", 800, 40, 60, 20));
+                AddMeal(days[3], new Meal("Roast Dinner", "1800", 1200, 40, 60, 20));
 
                 // Day 5
-                AddMeal(days[4], new Meal("Eggs and toast", "0700", 600, 30, 30, 20));
-                AddMeal(days[4], new Meal("Tuna Sandwhich", "1300", 800, 50, 30, 10));
-                AddMeal(days[4], new Meal("Roast Dinner", "1800", 800, 40, 60, 20));
+                AddMeal(days[4], new Meal("Avocado toast", "0900", 650, 34, 33, 22));
+                AddMeal(days[4], new Meal("Chicken Salad", "1200", 800, 50, 30, 10));
+                AddMeal(days[4], new Meal("Chicken Pasta", "1900", 800, 40, 60, 20));
 
                 // Day 6
-                AddMeal(days[5], new Meal("Eggs and toast", "0700", 600, 30, 30, 20));
                 AddMeal(days[5], new Meal("Tuna Sandwhich", "1300", 800, 50, 30, 10));
                 AddMeal(days[5], new Meal("Roast Dinner", "1800", 800, 40, 60, 20));
-                
+
                 // Day 7
-                AddMeal(days[6], new Meal("Eggs and toast", "0700", 600, 30, 30, 20));
-                AddMeal(days[6], new Meal("Tuna Sandwhich", "1300", 800, 50, 30, 10));
-                AddMeal(days[6], new Meal("Roast Dinner", "1800", 800, 40, 60, 20));
+                AddMeal(days[6], new Meal("Cereal", "1000", 400, 20, 30, 20));
+                AddMeal(days[6], new Meal("Vegetable soup", "1400", 800, 50, 30, 10));
+                AddMeal(days[6], new Meal("Spaghetti and meatballs", "1700", 800, 40, 60, 20));
+
 
                 // Day 8
-                AddMeal(days[7], new Meal("Eggs and toast", "0700", 600, 30, 30, 20));
-                AddMeal(days[7], new Meal("Tuna Sandwhich", "1300", 800, 50, 30, 10));
-                AddMeal(days[7], new Meal("Roast Dinner", "1800", 800, 40, 60, 20));
+                AddMeal(days[7], new Meal("Avocado toast", "0900", 650, 34, 33, 22));
+                AddMeal(days[7], new Meal("Chicken Salad", "1200", 800, 50, 30, 10));
+                AddMeal(days[7], new Meal("Chicken Pasta", "1900", 800, 40, 60, 20));
 
                 Console.WriteLine("Adding data to db");
 

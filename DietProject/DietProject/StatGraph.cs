@@ -41,7 +41,7 @@ namespace DietProject
         {
             // Create a list of dates. Add dates from the start day to the current day into the list. Return as array
             var dates = new List<string>();
-            DateTime currentDay = DateTime.Now;
+            DateTime currentDay = DateTime.Now.Date;
 
             // Works by adding a negative amount of days to the current date. This will give the date in range amount of days ago
             for (DateTime dt = currentDay.AddDays(-range); dt <= currentDay; dt = dt.AddDays(1))
@@ -61,13 +61,13 @@ namespace DietProject
             ChartValues<int> Values = new ChartValues<int>();
 
             // Get the past range of days
-            var days = new List<string>();
+            var days = new List<DateTime>();
             DateTime currentDay = DateTime.Now.Date;
             DateTime startDay = currentDay.AddDays(-range);
 
             for (DateTime dt = startDay; dt <= currentDay; dt = dt.AddDays(1))
             {
-                days.Add(dt.Date.ToString());
+                days.Add(dt.Date);
             }
 
             // query LiteDB where the day is between the start and current day (inclusive)
