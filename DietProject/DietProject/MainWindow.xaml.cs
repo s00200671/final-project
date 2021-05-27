@@ -52,7 +52,7 @@ namespace DietProject
 
                 if (selectedDay != null)
                 {
-                    string newTime = generateDBTime(time_cbx.SelectedItem.ToString(), Int16.Parse(hour_tbx.Text), Int16.Parse(minute_tbx.Text));
+                    string newTime = generateDBTime(time_cbx.Text, Int16.Parse(hour_tbx.Text), Int16.Parse(minute_tbx.Text));
 
                     MessageBox.Show(newTime);
 
@@ -69,9 +69,9 @@ namespace DietProject
                     RefreshMeals();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("error");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -117,7 +117,7 @@ namespace DietProject
             var getDays = dbDays.Query()
                         .Select(x => x)
                         .ToList()
-                        .OrderByDescending(x => x.Id);
+                        .OrderByDescending(x => Convert.ToDateTime(x.date));
 
             Days_lbx.ItemsSource = getDays;
         }
@@ -185,8 +185,6 @@ namespace DietProject
         private void PastDays_cbx_DropDownClosed(object sender, EventArgs e)
         {
             string selectedOption = PastDays_cbx.Text.ToLower();
-
-            MessageBox.Show(selectedOption);
 
             if (selectedOption != null)
             {
