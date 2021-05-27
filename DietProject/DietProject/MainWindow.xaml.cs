@@ -67,6 +67,13 @@ namespace DietProject
                     DBDays.AddMealDB(dbDays, selectedDay, newMeal);
 
                     RefreshMeals();
+
+                    ClearTblk();
+
+                    totalCal_tblk.Text = selectedDay.TotalCalories.ToString();
+                    totalCarbs_tblk.Text = selectedDay.TotalCarbs.ToString();
+                    totalProtein_tblk.Text = selectedDay.TotalProtein.ToString();
+                    totalFat_tblk.Text = selectedDay.TotalFat.ToString();
                 }
             }
             catch (Exception ex)
@@ -131,6 +138,7 @@ namespace DietProject
                 {
                     day.Meals = new List<Meal>();
                 }
+                Meals_lbx.ItemsSource = null;
                 Meals_lbx.ItemsSource = day.Meals;
             }
         }
