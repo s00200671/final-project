@@ -111,6 +111,7 @@ namespace DietProject
 
         private void Day_btn_Click(object sender, RoutedEventArgs e)
         {
+            // Add a day to the db
             DateTime selectedDate = (DateTime)day_dp.SelectedDate;
             if (selectedDate != null)
             {
@@ -121,6 +122,7 @@ namespace DietProject
 
         private void Meals_lbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Get the meal info 
             Meal selectedMeal = Meals_lbx.SelectedItem as Meal;
 
             if (selectedMeal != null)
@@ -134,6 +136,7 @@ namespace DietProject
 
         private void Calender_lbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Fill the day info in, and get the list of meals for this day
             Day selectedDay = Days_lbx.SelectedItem as Day;
          
             if(selectedDay != null)
@@ -193,6 +196,7 @@ namespace DietProject
         {
             string selectedOption = PastDays_cbx.Text.ToLower();
 
+            // Change the graph to the past week or month, depending on the combobox selection
             if (selectedOption != null)
             {
                 if (selectedOption == "week")
@@ -207,7 +211,7 @@ namespace DietProject
                 }
                 else
                 {
-                    throw new Exception("Not a valid drop down selection");
+                    return;
                 }
             }
         }

@@ -18,29 +18,34 @@ namespace DBDataInit
     {
         static void Main(string[] args)
         {
-
+            // Path and db name. If changed, also change in DietProject
             const string directory = @"C:\DietProjectDB";
             const string db_path = @"C:\DietProjectDB\userData.db";
-            // Construst DB if it doesn't exist.
+
             Console.WriteLine($"Creating directory in location {directory}");
 
+            // Construst DB if it doesn't exist.
             System.IO.Directory.CreateDirectory(@"C:\DietProjectDB");
 
             Console.WriteLine($"Constructing DB {db_path}");
 
+            // Get the new db, create if it doesn't exist
             LiteDatabase db = new LiteDatabase(db_path);
 
             using (db)
             {
+                // Get/create collection
                 ILiteCollection<Day> dbDays = db.GetCollection<Day>("days");
 
                 Console.WriteLine("DB constructed");
 
                 Console.WriteLine("Initializing data");
 
+                // Get the current date
                 DateTime currentDate = DateTime.Now.Date;
                 List<Day> days = new List<Day>();
 
+                // Get the past 8 days until today (not inclusive)
                 for (DateTime dt = currentDate.AddDays(-8); dt < currentDate; dt = dt.AddDays(1))
                 {
                     days.Add(new Day()
@@ -91,6 +96,7 @@ namespace DBDataInit
 
                 Console.WriteLine("Adding data to db");
 
+                // Insert each day into the db
                 foreach(Day day in days)
                 {
                     dbDays.Insert(day);
@@ -100,7 +106,8 @@ namespace DBDataInit
 
                 Console.WriteLine("Creating index on dates");
 
-                dbDays.EnsureIndex("date");
+                // Create an index on the date property if one doesn't already exist
+                dbDays.EnsureIndex(x => x.date);
 
                 Console.WriteLine("Index created\nData initialization complete! Enter any key to close...");
 
@@ -111,6 +118,7 @@ namespace DBDataInit
 
         private static void AddMeal(Day day, Meal meal)
         {
+            // Simple method to add meals quickly while incrementing the daily total
             day.TotalCalories += meal.Calories;
             day.TotalCarbs += meal.Carbs;
             day.TotalProtein += meal.Protein;
