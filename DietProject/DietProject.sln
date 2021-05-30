@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietProject", "DietProject\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBDataInit", "DBDataInit\DBDataInit.csproj", "{9142ED1B-68D4-442A-9062-2AAA31CFBB03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietProject.Tests", "DietProject.Tests\DietProject.Tests.csproj", "{EC060618-AA99-454F-8BEA-F73FABF387F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9142ED1B-68D4-442A-9062-2AAA31CFBB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9142ED1B-68D4-442A-9062-2AAA31CFBB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9142ED1B-68D4-442A-9062-2AAA31CFBB03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC060618-AA99-454F-8BEA-F73FABF387F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC060618-AA99-454F-8BEA-F73FABF387F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC060618-AA99-454F-8BEA-F73FABF387F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC060618-AA99-454F-8BEA-F73FABF387F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

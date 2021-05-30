@@ -49,7 +49,15 @@ namespace DietProject
             }
             if (DayNight.ToLower() == "am")
             {
-                return hour.ToString("00") + minute.ToString("00");
+
+                if (hour < 12)
+                {
+                    return (hour + 12).ToString("00") + minute.ToString("00");
+                }
+                else
+                {
+                    return "00" + minute.ToString("00");
+                }
             }
             else if (DayNight.ToLower() == "pm")
             {
@@ -59,7 +67,7 @@ namespace DietProject
                 }
                 else
                 {
-                    return "00" + minute.ToString("00");
+                    return hour.ToString("00") + minute.ToString("00");
                 }
             }
             else

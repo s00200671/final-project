@@ -25,7 +25,7 @@ namespace DBDataInit
             Console.WriteLine($"Creating directory in location {directory}");
 
             // Construst DB if it doesn't exist.
-            System.IO.Directory.CreateDirectory(@"C:\DietProjectDB");
+            System.IO.Directory.CreateDirectory(directory);
 
             Console.WriteLine($"Constructing DB {db_path}");
 
