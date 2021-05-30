@@ -77,8 +77,6 @@ namespace DietProject
                     // Use the DBDays static class method to generate a time for the db when we add it 
                     string newTime = DBDays.generateDBTime(time_cbx.Text, Int16.Parse(hour_tbx.Text), Int16.Parse(minute_tbx.Text));
 
-                    MessageBox.Show(newTime);
-
                     Meal newMeal = new Meal(
                                        MealName_tbx.Text,                            // Name
                                        newTime,                                      // time
@@ -95,6 +93,10 @@ namespace DietProject
 
                     // Clear the textboxes
                     ClearTblk();
+
+                    // Refresh the stat graph
+                    StatGraph graph = new StatGraph(7);
+                    Stat_Graph.DataContext = graph;
 
                     // Refresh the day info, since a new object is added, the calories will increase
                     totalCal_tblk.Text = selectedDay.TotalCalories.ToString();
