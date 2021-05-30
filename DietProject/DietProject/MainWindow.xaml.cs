@@ -111,6 +111,36 @@ namespace DietProject
             }
         }
 
+        private void DeleteMeal_btn_Click(object sender, RoutedEventArgs e)
+        {
+            // Remove selected meal from the selected days
+
+            // Get the day and meal info 
+            Day selectedDay = Days_lbx.SelectedItem as Day;
+            Meal selectedMeal = Meals_lbx.SelectedItem as Meal;
+
+            if (selectedDay != null && selectedMeal != null)
+            {
+                DBDays.RemoveMealDB(dbDays, selectedDay, selectedMeal);
+
+                // Refresh the list of meals
+                RefreshMeals();
+
+                // Clear the textboxes
+                ClearTblk();
+
+                // Refresh the stat graph
+                StatGraph graph = new StatGraph(7);
+                Stat_Graph.DataContext = graph;
+
+                // Refresh the day info, since a new object is added, the calories will increase
+                totalCal_tblk.Text = selectedDay.TotalCalories.ToString();
+                totalCarbs_tblk.Text = selectedDay.TotalCarbs.ToString();
+                totalProtein_tblk.Text = selectedDay.TotalProtein.ToString();
+                totalFat_tblk.Text = selectedDay.TotalFat.ToString();
+            }
+        }
+
         private void Day_btn_Click(object sender, RoutedEventArgs e)
         {
             // Add a day to the db

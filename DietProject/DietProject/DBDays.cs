@@ -30,6 +30,16 @@ namespace DietProject
             }
         }
 
+        public static void RemoveMealDB(ILiteCollection<Day> days, Day day, Meal meal)
+        {
+            day.Meals.Remove(meal);
+            day.TotalCalories -= meal.Calories;
+            day.TotalCarbs -= meal.Carbs;
+            day.TotalProtein -= meal.Protein;
+            day.TotalFat -= meal.Fat;
+            days.Update(day);
+        }
+
         public static void AddDayDB(ILiteCollection<Day> days, DateTime iDate)
         {
             // Inserts a new day into the given collection
