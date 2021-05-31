@@ -21,6 +21,9 @@ namespace DietProject
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+    
+    // uses LiveCharts and LiteDB to create an app which allows users to add or remove days and meals to a database 
     
 
     public static class DB

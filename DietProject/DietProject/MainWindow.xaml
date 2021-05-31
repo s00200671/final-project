@@ -66,9 +66,9 @@
                             <ListBox x:Name="Meals_lbx" HorizontalAlignment="Left" Height="152" Margin="10,78,0,0" VerticalAlignment="Top" Width="271" SelectionChanged="Meals_lbx_SelectionChanged"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.468,0.652" FontSize="22" Text="Meals" Margin="10,44,0,0"/>
                             <Button Grid.Column="0" Content="Add a new meal" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
-                             Margin="10,295,118.4,0" Height="35" VerticalAlignment="Top"/>
+                             Margin="10,295,86.4,0" Height="35" VerticalAlignment="Top"/>
                             <Button x:Name="DeleteMeal_btn" Grid.Column="0" Content="Delete selected meal"
-                                Margin="10,245,118.4,0" Height="35" VerticalAlignment="Top" Click="DeleteMeal_btn_Click"/>
+                                Margin="10,245,86.4,0" Height="35" VerticalAlignment="Top" Click="DeleteMeal_btn_Click"/>
                         </Grid>
                     </materialDesign:DialogHost>
 
